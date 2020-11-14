@@ -1,7 +1,7 @@
 <script>
 
-    import { logout } from "./firebaseBackend"
-    import { userDataStore } from "./stores/userDataStore"
+    import { logout } from "../firebaseBackend"
+    import { userDataStore } from "../stores/userDataStore"
 </script>
 
 <style>
@@ -26,7 +26,6 @@
     }
 </style>
 
-<Router>
     <h1>Svelte Firebase Starter</h1>
     <!--
     {@debug $userDataStore}
@@ -41,30 +40,22 @@
         <p>Not logged in</p>
     {/if}
     <div>
-        <a href="/" use:link>Home</a>
+        <a href="/" >Home</a>
         {#if !$userDataStore}
-            <a href="/register" use:link>Register</a>
-            <a href="/signin" use:link>Signin</a>
+            <a href="/register" >Register</a>
+            <a href="/signin" >Signin</a>
         {:else}
-            <a href="{$userDataStore.username}" use:link>Profile</a>
+            <a href="{$userDataStore.username}" >Profile</a>
 
-            <a href="/settings" use:link>Settings</a>
+            <a href="/settings" >Settings</a>
             <button on:click="{logout}">Logout</button>
         {/if}
-        <a href="/users" use:link>Users</a>
+        <a href="/users" >Users</a>
 
         <hr />
 
         <div>
 
-            <Route path="register" component="{Register}" />
-            <Route path="recover" component="{Recover}" />
-            <Route path="signin" component="{Signin}" />
-            <Route path="settings" component="{Settings}" />
-            <Route path="users" component="{Users}" />
-            <Route path=":username" component="{Profile}" />
-
-            <Route path="/" component="{Home}" />
+            <slot />
         </div>
     </div>
-</Router>
